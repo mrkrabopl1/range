@@ -1,15 +1,20 @@
 .progress {
     position: relative;
-    width: 640px;
+    width: 100px;
     height: 20px;
     overflow: hidden;
     display: inline-block;
-    bottom: 8px;
+
 
 
 }
+
+.slider-scale{
+    display: inline-flex;
+}
 .wrap{
 display: inline-block;
+
 }
 
 .strips {
@@ -48,13 +53,64 @@ display: inline-block;
     text-align: center;
     position: absolute;
 }
+
+.block_layer1{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    z-index: -1;
+    border-radius: 20px;
+
+}
+
+.uu1{
+
+    text-align: center;
+    width: 100%;
+    margin: auto;
+    display: block;
+    position:absolute;
+    bottom: 40px;
+    border-radius: 100px;
+    color: #dddddd;
+
+
+
+
+    height: 20px;
+    background-color: blue;
+
+}
+
+.uu2{
+
+    text-align: center;
+    width: 100%;
+    margin: auto;
+    display: block;
+    position:absolute;
+    bottom: 40px;
+    border-radius: 100px;
+    color: #dddddd;
+
+
+
+
+    height: 20px;
+    background-color: blue;
+
+}
+
 .block{
+    margin-top: 10%;
     width: 100%;
 
 
 
     height: 40px;
-    background-image: linear-gradient(to top, transparent 0%, transparent 35%, blueviolet 35%, blueviolet 65%,transparent 65%, transparent 100% );
+    background-image: linear-gradient(to top, white 0%, white 35%, transparent 35%, transparent 65%,white 65%, white 100% );
     position: relative;
     border-radius: 20px;
     display: flex;
@@ -62,8 +118,8 @@ display: inline-block;
 
 }
 .uu{
-    display: flex;
-    position: relative;
+
+
     margin: auto;
 
     height: 25px;
@@ -77,11 +133,21 @@ display: inline-block;
 }
 
 .pip{
-    position: relative;
+    position: absolute;
+    height: 100%;
     margin: auto 0;
     transition-property: left;
     transition-duration: 0.01s;
+    display: flex;
 }
+.pip1{
+     position: absolute;
+     height: 100%;
+     margin: auto 0;
+     transition-property: left;
+     transition-duration: 0.01s;
+     display: flex;
+ }
 .main{
     display: flex;
     justify-content: center;
