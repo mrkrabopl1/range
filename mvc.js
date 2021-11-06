@@ -144,13 +144,21 @@
 //     count++
 // }
 let slider=document.querySelector(".slider-scale")
+let pip = document.querySelector(".pip");
+const cont = document.querySelector(".container");
 class Model{
-    cons(){console.log(9)}
+
     constructor(cords,progressBars){
         this._progressBars=progressBars||[];
+        this.spherePosition={}
+        this.containerStyles={}
         this._cords=cords;
         this._selectedIndex=-1
         this.domObj={}
+    }
+    getStyles(obj){
+        this.containerStyles.left=obj.getBoundingClientRect().left;
+        this.containerStyles.width=obj.getBoundingClientRect().width;
     }
     changeMax(item){
         this._cords.splice(this._selectedIndex,1,Number(item))
@@ -174,6 +182,28 @@ class Test{
         this._domElementClass = domElementClass;
 
         this._model = model
+    }
+    corsInPerc(){
+        this._model.spherePosition.perc=(this._model.spherePosition.clientX- this._model.containerStyles.left)/
+            this._model.containerStyles. width*100;
+    }
+    createSpherePosition(){
+        if (  this._model.spherePosition.perc>=0 &&  this._model.spherePosition.perc<=100){
+            this._model.spherePosition.left=`${this._model.spherePosition.perc-6}%`;
+
+
+            //count.innerHTML=`${Math.trunc(obj.perc1)}`;
+        }
+        else if (this._model.spherePosition.perc>100){
+            this._model.spherePosition.left=`94%`;
+            //count.innerHTML=`100`;
+        }
+        else if (this._model.spherePosition.perc<0){
+            this._model.spherePosition.left=`-6%`;
+            //count.innerHTML=`0`;
+        }
+
+
     }
 
     compareMaxItem(maxElem){
@@ -341,6 +371,7 @@ class View{
 
                 slider.appendChild( this._model.domObj["slider-scale-tick"][i+1])
         }
+        this._model.domObj["slider-scale-tick"][ this._model.domObj["slider-scale-tick"].length-1].style.marginRight="0px";
     }
     createMeasure(m){
         for(let i=0;i<=m;i++){
@@ -350,8 +381,13 @@ class View{
         }
     }
 
+    assignStyle(obj){
+        obj.style.left=this._model.spherePosition.left
+    }
+
 }
 
+console.log(model.containerStyles)
 let view=new View(model)
 
 pip1= new Test(model,['slider-scale-big','progress']) ;
@@ -416,4 +452,34 @@ pip1.rebuildList('slider-scale-big')
  //view.show()
 
 })
+let flag=true
 // pip1.rebuildList()
+let move=function(e){
+
+    model.spherePosition.clientX=e.clientX
+    pip1. corsInPerc()
+    pip1.createSpherePosition()
+
+    console.log( model.spherePosition)
+
+    view.assignStyle(pip)
+
+}
+pip.addEventListener("mousedown",function(e) {
+
+    model.getStyles(cont)
+    move(e)
+
+
+
+    document.addEventListener('mousemove', move)
+
+})
+window.addEventListener('mouseup', function () {
+    document.removeEventListener('mousemove', move)
+
+
+
+
+
+});
